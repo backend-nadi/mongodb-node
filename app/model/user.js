@@ -10,6 +10,19 @@ let userSchema = new mongoose.Schema({
     },
     age:{
         type: Number
+    },
+    hobbies: [
+        {
+            title:{
+                type: String
+            },
+            frequency: {
+                type: String
+            }
+        }
+    ],
+    phone: {
+        type: String
     }
 })
 

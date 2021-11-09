@@ -9,6 +9,7 @@ mongoose.connect(`${MONGO_URL}`)
 const userRouter = require('./app/route/user')
 const productRouter = require('./app/route/product')
 const postRouter = require('./app/route/posts')
+const showRouter = require('./app/route/show')
 
 const app = express()
 const server = http.createServer(app)
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/product', productRouter)
 app.use('/user', userRouter)
 app.use('/posts', postRouter)
+app.use('/show', showRouter)
 
 
 
