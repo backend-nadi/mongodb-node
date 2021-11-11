@@ -28,8 +28,9 @@ module.exports = {
         const and = await Show.find({$and: [{name: 'The Last Ship'}, {genres: 'Drama'}]})
         const not = await Show.find({$not: [{name: 'The Last Ship'}, {genres: 'Drama'}]})
         const and1 = await Show.find({$and: [{genres: "Drama"}, {genres: "Horror"}]})
+        const projection = await Show.find({genres: {$all: ['Drama', 'Horror']}}, {"genres.$":1})
         res.json({
-            data: and1
+            data: projection
         })
     },
     regex: async(req,res) => {

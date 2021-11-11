@@ -3,9 +3,9 @@ const Post = require('../model/posts')
 module.exports = {
     insert: async(req,res) => {
         const data = {
-            title: 'my frist blog',
-            text: 'hello this is my first blog',
-            tags: ['it', 'develop', 'managering'],
+            title: 'my third blog',
+            text: 'hello this is my third blog',
+            tags: ['electronic', 'movie', 'it'],
             creator: '6188e8de155c4809b20c78f4',
             comments: [
                 {
@@ -33,8 +33,9 @@ module.exports = {
                     foreignField: '_id',
                     as: 'user_creator'
                 }
-            }
+            },
         ])
+        const all = await Post.find({tags: {$all: ['movie']}})
         res.json({
             data: response
         })

@@ -57,9 +57,12 @@ module.exports = {
     },
     get: async(req,res) => {
         const response = await User.find()
-        const notage = await User.find({age: {$exists: true, $gte: 30}})
+        const notage = await User.find({age: {$exists: true, $gte: 30}}) // kalo di ubah false cari data yang tiak mempunyai value tersebut
+        const arr = await User.find({'hobbies.title': 'climb'})
+        const elem = await User.find({hobbies: {$elemMatch: {title: 'climb', frequency: {$gt: 10}}}})
+        const shortingData = await User.find({},{name: 1, _id: 0})
         res.json({
-            data: notage
+            data: shortingData
         })
     }
 }
