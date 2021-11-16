@@ -62,11 +62,23 @@ module.exports = {
                 text: 'hi im new here,please help',
                 author: '6188e8de155c4809b20c78f5'
         }
-        await Post.update({_id:id}, {
+        await Post.updateOne({_id:id}, {
             $push:{
                 comments: data
             }
         })
         res.send('succes add array')
+    },
+    updateArray: async(req,res) => {
+        const {id} = req.params
+        await Post.updateOne({_id: id}, {$set:{
+            tags: ['front end', 'back end', 'devops']
+        }})
+        res.send(`succes update ${id}`)
+    },
+    delete: async(req,res) => {
+        const {id} = req.params
+        await Post.deleteOne({_id:id})
+        res.send(`success delete ${id}`)
     }
 }

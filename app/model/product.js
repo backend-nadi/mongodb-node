@@ -8,6 +8,7 @@ let productSchema = new mongoose.Schema({
     price:{
         type: Number
     },
+    tags: [],
     details:{
         cpu:{
             type: String

@@ -4,44 +4,44 @@ module.exports = {
     insert: async(req,res) => {
         const data = [
             {
-                name: 'diana',
-                email: 'diana@test.com',
-                age: 23,
+                name: 'mariana',
+                email: 'mariana@test.com',
+                age: 28,
                 hobbies: [
                     {
-                        title: 'sport',
-                        frequency: '60'
+                        title: 'shooting',
+                        frequency: '90'
                     },
                     {
-                        title: 'cooking',
-                        frequency: '50'
-                    },
-                ],
-                phone: '09885885'
-            },
-            {
-                name: 'banny',
-                email: 'banny@test.com',
-                age: 30,
-                hobbies: [
-                    {
-                        title: 'motor',
-                        frequency: '20'
-                    },
-                    {
-                        title: 'googling',
+                        title: 'cycling',
                         frequency: '10'
                     },
                 ],
-                phone: '098822'
+                phone: '094488484'
             },
             {
-                name: 'percy',
-                email: 'percy@test.com',
-                age: 20,
+                name: 'angelo',
+                email: 'angelo@test.com',
+                age: 10,
                 hobbies: [
                     {
-                        title: 'climb',
+                        title: 'shooting',
+                        frequency: '20'
+                    },
+                    {
+                        title: 'racer',
+                        frequency: '10'
+                    },
+                ],
+                phone: '00300303'
+            },
+            {
+                name: 'moreno',
+                email: 'moreno@test.com',
+                age: 21,
+                hobbies: [
+                    {
+                        title: 'sport',
                         frequency: '60'
                     },
                     {
@@ -49,7 +49,7 @@ module.exports = {
                         frequency: '50'
                     },
                 ],
-                phone: '0999'
+                phone: '08883'
             },
         ]
         await User.insertMany(data)
@@ -64,5 +64,33 @@ module.exports = {
         res.json({
             data: shortingData
         })
+    },
+    update: async(req,res) => {
+        await User.updateMany({hobbies: {$elemMatch: {title: 'shooting'}}}, {$set:{
+            'hobbies.$': {title: 'shooter',frequency: 30}
+        }}) // -> .$ untuk tidak mngubah semua data atau menghilangkan data
+        await User.updateMany({hobbies: {$elemMatch: {title: 'shooting'}}}, {$set:{
+            'hobbies.$.highFrequency': {title: 'shooter',frequency: 30}
+        }}) // menambahkan field baru ke dalam arry object
+        res.send('succes updating data')
+    },
+    updateArrayEach: async(req,res) => {
+        const {id} = req.params
+        await User.updateOne({_id:id}, {$push: {hobbies: {$each: [
+            {
+                title: 'snorkling',
+                frequency: 80
+            },
+            {
+                title: 'sleeping',
+                frequency: 100
+            }
+        ]}}})
+        res.send('door success')
+    },
+    removingArray: async(req,res) => {
+        const {id} = req.params
+        await User.updateOne({_id:id}, {$pull: {hobbies: {title: 'sleeping'}}})
+        res.send('door succes')
     }
 }
