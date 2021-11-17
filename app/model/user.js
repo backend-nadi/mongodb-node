@@ -22,7 +22,7 @@ let userSchema = new mongoose.Schema({
         }
     ],
     phone: {
-        type: String
+        type: String,
     }
 })
 

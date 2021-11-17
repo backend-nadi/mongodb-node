@@ -33,10 +33,11 @@ module.exports = {
         res.send('success')
     },
     get: async(req,res) => {
-        const {name} = req.query
-        const getOne = await Product.find({tags: {$all: name}})
-        res.json({
-            data:getOne
-        })
+        const {tags} = req.query
+        const getOne = await Product.find({tags: {$all: tags}})
+            res.json({
+                data:getOne
+            })
+        
     },
 }
