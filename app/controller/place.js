@@ -5,26 +5,26 @@ module.exports = {
     insert: async(req,res) => {
         const data = [
             {
-                name: 'kelapa gading',
+                name: 'pondok indah',
                 location: {
                     type: 'Point',
-                    coordinates: [106.905462, -6.160455]
+                    coordinates: [106.7821449, -6.2655371]
                 }
             },
-            // {
-            //     name: 'Bellatera',
-            //     location: {
-            //         type: 'Point',
-            //         coordinates: [-6.1784994, 106.8916262]
-            //     }
-            // },
-            // {
-            //     name: 'TM Session City',
-            //     location: {
-            //         type: 'Point',
-            //         coordinates: [-6.1594949, 106.7853433]
-            //     }
-            // },
+            {
+                name: 'Pantai indah kapuk',
+                location: {
+                    type: 'Point',
+                    coordinates: [106.7376608, -6.1071624]
+                }
+            },
+            {
+                name: 'TM Session City',
+                location: {
+                    type: 'Point',
+                    coordinates: [106.7853433, -6.1594949]
+                }
+            },
             
         ]
         
@@ -55,7 +55,7 @@ module.exports = {
                             coordinates: [long, lat]
                         },
                         distanceField: 'dist.calculated',
-                        maxDistance: 500,
+                        maxDistance: 20000,
                         spherical: true
                     }
                 }

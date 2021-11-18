@@ -13,6 +13,7 @@ const showRouter = require('./app/route/show')
 const saleRouter = require('./app/route/sale')
 const personRouter = require('./app/route/person')
 const placeRouter = require('./app/route/place')
+const aggregareRouter = require('./app/route/aggregate')
 
 
 const app = express()
@@ -28,6 +29,7 @@ app.use('/show', showRouter)
 app.use('/sale', saleRouter)
 app.use('/person', personRouter)
 app.use('/place', placeRouter)
+app.use('/aggregate', aggregareRouter)
 
 
 
