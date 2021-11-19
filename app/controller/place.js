@@ -56,7 +56,10 @@ module.exports = {
                         },
                         distanceField: 'dist.calculated',
                         maxDistance: 20000,
-                        spherical: true
+                        spherical: true,
+                        query: {
+                            name: 'kelapa gading'
+                        }
                     }
                 }
             ])

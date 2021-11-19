@@ -94,5 +94,82 @@ module.exports = {
         res.json({
             data: data
         })
-    }
+    },
+     multipleArray: async(req,res) => {
+         const data = await User.aggregate([
+             {
+                 $unwind: '$hobbies'
+             },
+             {
+                 $project: {
+                     _id: 1,
+                     name: 1,
+                     age: 1,
+                     score: '$hobbies.frequency'
+                 }
+             },
+             {$sort: {score: -1}},
+             {
+                 $group: {
+                     _id: "$_id",
+                     name: {
+                         $first: '$name'
+                     },
+                     maxScore: {
+                         $max: '$score'
+                     }
+                 }
+             },
+             {$sort: {
+                 maxScore: -1
+             }}
+         ])
+         res.json({
+             data: data
+         })
+     },
+     bucket: async(req,res) => {
+         const data = await Person.aggregate([
+             {
+                 $bucket: {
+                     groupBy: '$dob.age',
+                     boundaries: [0,18,30,50,80,120],
+                     output: {
+                         numPerson: {$sum: 1},
+                         avarage: {
+                             $avg: '$dob.age'
+                         },
+                         names: {
+                             $push: '$name.first'
+                         }
+                     }
+                 }
+             }
+         ])
+         res.json({
+             data: data
+         })
+     },
+     stage: async(req,res) => {
+         const data = await Person.aggregate([
+             {
+                 $project: {
+                     _id: 0,
+                     name: 1,
+                     birthdate: {
+                         $toDate: '$dob.date'
+                     }
+                 }
+             },
+             {
+                 $sort: {
+                     birthdate: 1
+                 }
+             },
+             {$limit: 10}
+         ])
+         res.json({
+             data: data
+         })
+     }
 }
